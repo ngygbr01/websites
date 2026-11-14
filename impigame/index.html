@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="color-scheme" content="only light">
+    <title>Van egy teóriám... 🤣</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <script src="words.js"></script>
+
+    <style>
+        :root {
+            color-scheme: only light;
+            --bg-yellow: #feca57;
+            --bg-green: #1dd1a1;
+            --bg-red: #ff6b81;
+            --btn-main: #ff4757; 
+            --btn-shadow: #c0392b;
+            --btn-secondary: #0be881;
+            --btn-secondary-shadow: #05c46b;
+            --btn-stat: #1e90ff;
+            --btn-stat-shadow: #3742fa;
+            --card-front: #ffffff;
+            --card-back: #f1f2f6;
+            --text-dark: #2f3542;
+            --text-light: #747d8c;
+            --easing: cubic-bezier(0.34, 1.56, 0.64, 1);
+            --smooth-fade: cubic-bezier(0.25, 1, 0.5, 1);
+            --current-player-color: #ff4757;
+            --current-player-shadow: #c0392b;
+        }
+        
+        @keyframes gradient-move {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        body {
+            font-family: 'Fredoka', sans-serif;
+            background: linear-gradient(-45deg, var(--bg-yellow), var(--bg-green), var(--bg-red), var(--bg-yellow));
+            background-size: 400% 400%;
+            animation: gradient-move 12s ease infinite;
+            background-attachment: fixed;
+            color: var(--text-dark);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
+            overflow: hidden;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 400px;
+            perspective: 1000px;
+            position: relative;
+            height: 650px;
+            transition: opacity 0.3s;
+        }
+
+        .screen {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.85);
+            width: 100%;
+            box-sizing: border-box;
+            background-image: linear-gradient(rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.95));            
+            padding: 30px 20px;
+            border-radius: 35px;
+            box-shadow: 0 15px 0 rgba(0,0,0,0.1), 0 25px 40px rgba(0,0,0,0.3);
+            border: 4px solid #fff;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.4s var(--smooth-fade), transform 0.5s var(--easing);
+        }
+
+        .screen.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .game-title {
+            color: var(--btn-stat);
+            font-size: 2rem;
+            font-weight: 700;
+            margin-top: 0;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            text-shadow: 2px 2px 0px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            color: var(--current-player-color);
+            margin-top: 0;
+            font-size: 2.5rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 0px rgba(0,0,0,0.1);
+            transition: color 0.3s;
+        }
+
+        .instruction {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 25px;
+            color: var(--text-light);
+        }
+
+        .player-stepper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 30px;
+            background-image: linear-gradient(#f1f2f6, #f1f2f6);            
+            padding: 15px;
+            border-radius: 25px;
+            box-shadow: inset 0 5px 10px rgba(0,0,0,0.05);
+        }
+
+        .stepper-btn {
+            background-color: #ffa502;
+            color: white;
+            border: none;
+            width: 60px;
+            height: 60px;
+            border-radius: 20px;
+            font-size: 2.2rem;
+            font-family: 'Fredoka', sans-serif;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 6px 0 #e67e22;
+            transition: all 0.1s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .stepper-btn:active {
+            transform: translateY(6px) scale(0.95);
+            box-shadow: 0 0px 0 #e67e22;
+        }
+
+        #player-count-display {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            min-width: 60px;
+        }
+
+        /* 3D Gombok */
+        button.main-btn {
+            background-color: var(--btn-secondary);
+            color: white;
+            border: none;
+            padding: 18px 24px;
+            font-size: 1.4rem;
+            font-family: 'Fredoka', sans-serif;
+            font-weight: 700;
+            border-radius: 25px;
+            cursor: pointer;
+            width: 100%;
+            box-shadow: 0 8px 0 var(--btn-secondary-shadow);
+            transition: transform 0.1s, box-shadow 0.1s, opacity 0.2s;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        button.main-btn:active {
+            transform: translateY(8px);
+            box-shadow: 0 0px 0 var(--btn-secondary-shadow);
+        }
+
+        button.next-btn {
+            background-color: #5f27cd; 
+            box-shadow: 0 8px 0 #341f97;
+        }
+        button.next-btn:active {
+            box-shadow: 0 0px 0 #341f97;
+        }
+
+        button.stat-btn {
+            background-color: var(--btn-stat);
+            box-shadow: 0 8px 0 var(--btn-stat-shadow);
+        }
+        button.stat-btn:active {
+            box-shadow: 0 0px 0 var(--btn-stat-shadow);
+        }
+
+        .action-area {
+            min-height: 120px; 
+            margin-top: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 20px; 
+            width: 100%;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .card-container {
+            width: 100%;
+            max-width: 250px;
+            height: 350px;
+            margin: 0 auto;
+            cursor: pointer;
+            -webkit-user-select: none;
+            user-select: none;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .card-container:active {
+            animation: none; 
+            transform: scale(0.95);
+        }
+
+        .card {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.6s var(--easing);
+            border-radius: 30px;
+            box-shadow: 0 15px 25px rgba(0,0,0,0.2);
+        }
+
+        .card.flipped {
+            transform: rotateY(180deg);
+        }
+
+        .card-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-radius: 30px;
+            padding: 20px;
+            box-sizing: border-box;
+            -webkit-backface-visibility: hidden;
+        }
+
+        .card-front {
+            background-color: var(--current-player-color);
+            color: white;
+            border: 6px solid var(--current-player-shadow);
+            background-image: repeating-linear-gradient(45deg, rgba(255,255,255,0.1) 0px, rgba(255,255,255,0.1) 20px, transparent 20px, transparent 40px);
+            transition: background-color 0.4s var(--smooth-fade), border-color 0.4s var(--smooth-fade);
+        }
+
+        .card-back {
+            background-color: var(--card-back);
+            transform: rotateY(180deg);
+            border: 6px solid var(--current-player-color);
+            transition: border-color 0.4s var(--smooth-fade);
+        }
+
+        .role-text {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            padding: 5px 15px;
+            border-radius: 15px;
+            color: white;
+        }
+
+        .role-normal { background-color: var(--btn-secondary); box-shadow: 0 4px 0 var(--btn-secondary-shadow); }
+        .role-imposter { background-color: #ff4757; box-shadow: 0 4px 0 #c0392b; }
+
+        .word-display {
+            font-size: clamp(1.8rem, 8vw, 2.5rem);
+            font-weight: 700;
+            color: var(--text-dark);
+            margin: 20px 0;
+            text-align: center;
+            width: 100%;
+            line-height: 1.1;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(43, 43, 54, 0.8);
+            backdrop-filter: blur(5px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s var(--smooth-fade);
+            z-index: 1000;
+        }
+        
+        .overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .popup {
+            background-image: linear-gradient(#f1f2f6, #f1f2f6);
+            width: 85%; 
+            max-width: 340px;
+            max-height: 80vh; 
+            padding: 20px 15px; 
+            border-radius: 35px;
+            border: 6px solid var(--text-dark);
+            box-shadow: 0 20px 0 rgba(0,0,0,0.2);
+            position: relative;
+            transform: scale(0.7) translateY(30px);
+            transition: transform 0.4s var(--easing);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .overlay.active .popup {
+            transform: scale(1) translateY(0);
+        }
+
+        .popup h2 {
+            margin-top: 0;
+            color: var(--text-dark);
+            font-size: 2.2rem;
+            text-transform: uppercase;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .stat-list {
+            text-align: left;
+            overflow-y: auto;
+            flex-grow: 1; 
+            padding-right: 5px;
+            margin-bottom: 5px;
+        }
+
+        .stat-list::-webkit-scrollbar { width: 8px; }
+        .stat-list::-webkit-scrollbar-track { background: #e1e2e6; border-radius: 10px; }
+        .stat-list::-webkit-scrollbar-thumb { background: #a4b0be; border-radius: 10px; }
+
+        .stat-item {
+            margin-bottom: 12px;
+            padding: 10px 12px;
+            border-radius: 20px;
+            background-image: linear-gradient(#ffffff, #ffffff);
+            border: 4px solid #ccc;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 4px 0 rgba(0,0,0,0.05);
+            opacity: 0;
+            transform: translateX(-20px);
+            animation: slideIn 0.4s var(--easing) forwards;
+            width: 100%;
+            box-sizing: border-box; 
+        }
+
+        @keyframes slideIn {
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .close-popup {
+            position: absolute;
+            top: -15px; 
+            right: -10px;
+            background: #ff4757;
+            border: 4px solid var(--text-dark);
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: white;
+            font-weight: bold;
+            box-shadow: 0 4px 0 var(--text-dark);
+            transition: transform 0.1s;
+            z-index: 10;
+        }
+        .close-popup:active {
+            transform: translateY(4px);
+            box-shadow: 0 0px 0 var(--text-dark);
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <div id="setup-screen" class="screen active">
+            <h2 class="game-title">Van egy teóriám... 🤣</h2>
+            <h1>IMPOSZTOR</h1>
+            <p class="instruction">Hányan fogtok játszani?</p>
+            
+            <div class="player-stepper">
+                <button class="stepper-btn" onclick="changePlayers(-1)">-</button>
+                <div id="player-count-display">4</div>
+                <button class="stepper-btn" onclick="changePlayers(1)">+</button>
+            </div>
+            
+            <div class="action-area" style="min-height: auto;">
+                <button class="main-btn" onclick="startGame()">START!</button>
+            </div>
+        </div>
+
+        <div id="card-screen" class="screen">
+            <h1 id="player-turn-text">1. JÁTÉKOS</h1>
+            <p class="instruction">Tartsd lenyomva a kártyát!</p>
+            
+            <div class="card-container" id="card-trigger">
+                <div class="card" id="card-element">
+                    <div class="card-face card-front">
+                        <h2 style="font-size: 2.5rem; color: white;">👀</h2>
+                        <p style="font-weight: 600;">Nyomd le az ujjad!</p>
+                    </div>
+                    <div class="card-face card-back">
+                        <div id="role-text" class="role-text">Szerep</div>
+                        <div class="word-display" id="secret-word">???</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="action-area" style="min-height: auto;">
+                <button class="main-btn next-btn" id="next-player-btn" onclick="nextPlayer()" style="opacity: 0; pointer-events: none;">KÖVETKEZŐ</button>
+            </div>
+        </div>
+
+        <div id="game-screen" class="screen">
+            <h1>KÉSZ!</h1>
+            <p class="instruction" style="font-size: 1.3rem;">Mindenki megkapta a szavát.<br><br>Ki a gyanús? 🤔</p>
+            <p style="font-weight: 600; color: var(--text-light); margin-bottom: 5px;">A játékot kezdi:</p>
+            <div id="starter-player" style="font-size: 2.2rem; color: white; font-weight: 700; margin: 15px 0 25px; padding: 15px; background-color: #1e90ff; border-radius: 20px; box-shadow: 0 8px 0 #3742fa; transform: rotate(-2deg);">X. Játékos</div>
+            
+            <div class="action-area">
+                <button class="main-btn" onclick="resetGame()">ÚJ JÁTÉK</button>
+                <button class="main-btn stat-btn" onclick="showStatistics()">EREDMÉNYEK 🏆</button>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="overlay" id="stat-overlay">
+        <div class="popup">
+            <button class="close-popup" onclick="closeStatistics()">X</button>
+            <h2>Statisztika</h2>
+            <div class="stat-list" id="stat-list">
+                </div>
+        </div>
+    </div>
+
+    <script>
+        const playerColors = [
+            { main: "#ff4757", shadow: "#c0392b" }, { main: "#1e90ff", shadow: "#3742fa" }, { main: "#0be881", shadow: "#05c46b" }, { main: "#ffa502", shadow: "#e67e22" },
+            { main: "#9b59b6", shadow: "#8e44ad" }, { main: "#ff6b81", shadow: "#ff4757" }, { main: "#1dd1a1", shadow: "#10ac84" }, { main: "#feca57", shadow: "#ff9f43" },
+            { main: "#5f27cd", shadow: "#341f97" }, { main: "#ff9ff3", shadow: "#f368e0" }, { main: "#48dbfb", shadow: "#0abde3" }, { main: "#c8d6e5", shadow: "#8395a7" }
+        ];
+
+        let playerCount = 4;
+        let currentPlayer = 1;
+        let imposterIndex = 0;
+        let everyoneIsImposter = false;
+        let normalWord = "";
+        let imposterWord = "";
+        let currentScreen = 'setup-screen';
+        let wordSeen = false;
+        let playerWords = []; 
+
+        function switchScreen(screenId) {
+            const currentEl = document.getElementById(currentScreen);
+            const nextEl = document.getElementById(screenId);
+            currentEl.classList.remove('active');
+            setTimeout(() => {
+                nextEl.classList.add('active');
+                currentScreen = screenId;
+            }, 400); 
+        }
+
+        function changePlayers(delta) {
+            const display = document.getElementById('player-count-display');
+            playerCount = Math.max(3, Math.min(12, playerCount + delta));
+            display.innerText = playerCount;
+        }
+
+        function startGame() {
+            if (typeof wordPairs === 'undefined' || wordPairs.length === 0) {
+                alert("Hiba: A szavak nem töltődtek be!"); return;
+            }
+
+            everyoneIsImposter = Math.random() < 0.05;
+            if (!everyoneIsImposter) {
+                imposterIndex = Math.floor(Math.random() * playerCount) + 1;
+            } else {
+                imposterIndex = 0; 
+            }
+
+            const randomPairIndex = Math.floor(Math.random() * wordPairs.length);
+            const pair = wordPairs[randomPairIndex];
+
+            if (Math.random() > 0.5) {
+                normalWord = pair.a; imposterWord = pair.b;
+            } else {
+                normalWord = pair.b; imposterWord = pair.a;
+            }
+
+            currentPlayer = 1;
+            playerWords = [];
+            updateCardScreen();
+            switchScreen('card-screen');
+        }
+
+        function updateCardScreen() {
+            document.getElementById('player-turn-text').innerText = currentPlayer + ". JÁTÉKOS";
+            const wordDisplay = document.getElementById('secret-word');
+            const roleDisplay = document.getElementById('role-text');
+            const nextPlayerBtn = document.getElementById('next-player-btn');
+            
+            const colorObj = playerColors[(currentPlayer - 1) % playerColors.length];
+            document.documentElement.style.setProperty('--current-player-color', colorObj.main);
+            document.documentElement.style.setProperty('--current-player-shadow', colorObj.shadow);
+            
+            wordSeen = false;
+            nextPlayerBtn.style.opacity = '0'; nextPlayerBtn.style.pointerEvents = 'none';
+            document.getElementById('card-element').classList.remove('flipped');
+
+            if (everyoneIsImposter || currentPlayer === imposterIndex) {
+                roleDisplay.innerText = "Te vagy az imposztor!";
+                roleDisplay.className = "role-text role-imposter";
+                wordDisplay.innerText = imposterWord;
+                playerWords.push({player: currentPlayer, word: imposterWord, isImposter: true});
+            } else {
+                roleDisplay.innerText = "Többségben vagy!";
+                roleDisplay.className = "role-text role-normal";
+                wordDisplay.innerText = normalWord;
+                playerWords.push({player: currentPlayer, word: normalWord, isImposter: false});
+            }
+        }
+
+        const cardTrigger = document.getElementById('card-trigger');
+        const cardElement = document.getElementById('card-element');
+        const nextPlayerBtn = document.getElementById('next-player-btn');
+
+        function handlePointerDown(e) { if (currentScreen !== 'card-screen') return; cardElement.classList.add('flipped'); wordSeen = true; }
+        function handlePointerUp(e) {
+            if (currentScreen !== 'card-screen') return; cardElement.classList.remove('flipped');
+            if (wordSeen) {
+                setTimeout(() => { nextPlayerBtn.style.opacity = '1'; nextPlayerBtn.style.pointerEvents = 'auto'; }, 500); 
+            }
+        }
+
+        cardTrigger.addEventListener('pointerdown', handlePointerDown); cardTrigger.addEventListener('pointerup', handlePointerUp);
+        cardTrigger.addEventListener('pointerleave', handlePointerUp); 
+        cardTrigger.addEventListener('touchstart', (e) => { e.preventDefault(); handlePointerDown(e); }, {passive: false});
+        cardTrigger.addEventListener('touchend', (e) => { e.preventDefault(); handlePointerUp(e); }, {passive: false});
+
+        function nextPlayer() {
+            const nextBtn = document.getElementById('next-player-btn');
+            nextBtn.style.opacity = '0';
+            nextBtn.style.pointerEvents = 'none';
+
+            currentPlayer++;
+            if (currentPlayer > playerCount) { 
+                const starterIndex = Math.floor(Math.random() * playerCount) + 1;
+                document.getElementById('starter-player').innerText = starterIndex + ". JÁTÉKOS kezd!";
+                
+                switchScreen('game-screen'); 
+            } else {
+                const container = document.querySelector('.container');
+                container.style.opacity = '0';
+                setTimeout(() => { updateCardScreen(); container.style.opacity = '1'; }, 300);
+            }
+        }
+
+        function resetGame() { switchScreen('setup-screen'); }
+
+        function showStatistics() {
+            const statOverlay = document.getElementById('stat-overlay');
+            const statList = document.getElementById('stat-list');
+            statList.innerHTML = ''; 
+
+            playerWords.forEach((item, index) => {
+                const statItem = document.createElement('div');
+                statItem.className = 'stat-item';
+                
+                statItem.style.animationDelay = `${index * 0.1}s`;
+                
+                const playerColorObj = playerColors[(item.player - 1) % playerColors.length];
+                const playerColor = playerColorObj.main;
+                
+                const playerNameHtml = `<span style="color: ${playerColor}; font-weight: 800; font-size: 1.2rem; text-transform: uppercase;">${item.player}. Játékos</span>`;
+
+                if (item.isImposter) {
+                    statItem.style.borderColor = '#ff4757';
+                    statItem.style.backgroundImage = 'linear-gradient(#ffebee, #ffebee)'; 
+                    statItem.innerHTML = `
+                        <div style="font-size: 2.2rem; filter: drop-shadow(0 2px 2px rgba(0,0,0,0.2)); flex-shrink: 0;">🕵️</div>
+                        <div style="line-height: 1.2; flex: 1; min-width: 0; word-wrap: break-word;">
+                            ${playerNameHtml}<br>
+                            <span style="color:#e84118; font-weight: 800; font-size: 1.1rem; word-break: break-word;">${item.word}</span>
+                        </div>
+                    `;
+                } else {
+                    statItem.style.borderColor = '#0be881'; 
+                    statItem.innerHTML = `
+                        <div style="font-size: 2.2rem; filter: drop-shadow(0 2px 2px rgba(0,0,0,0.2)); flex-shrink: 0;">✅</div>
+                        <div style="line-height: 1.2; flex: 1; min-width: 0; word-wrap: break-word;">
+                            ${playerNameHtml}<br>
+                            <span style="color:#05c46b; font-weight: 800; font-size: 1.1rem; word-break: break-word;">${item.word}</span>
+                        </div>
+                    `;
+                }
+                
+                statList.appendChild(statItem);
+            });
+            statOverlay.classList.add('active');
+        }
+
+        function closeStatistics() { document.getElementById('stat-overlay').classList.remove('active'); }
+    </script>
+</body>
+</html>

@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Padkaporos Táncegyüttes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FAF7F2;--ink:#2A1D1B;--muted:#6E5F5A;--card:#FFFFFF;--line:#E8DFD3;
+  --wine:#8C2F39;--wine-d:#6F222B;--gold:#E0A93B;--green:#2F4A3A;--link:#8C2F39;--chip:#F1E9DD;
+  --serif:"Fraunces",Georgia,"Times New Roman",serif;--sans:"Figtree",system-ui,-apple-system,"Segoe UI",sans-serif;
+  box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){--bg:#1B1514;--ink:#F3EBE1;--muted:#B5A69D;--card:#261D1B;--line:#3A2E2B;--link:#EDA0A8;--chip:#322623;}
+}
+:root[data-theme="dark"]{--bg:#1B1514;--ink:#F3EBE1;--muted:#B5A69D;--card:#261D1B;--line:#3A2E2B;--link:#EDA0A8;--chip:#322623;}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 70px);-webkit-text-size-adjust:100%}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.6 var(--sans);overflow-x:hidden}
+img{max-width:100%;display:block}
+a{color:var(--link)}
+h1,h2,h3{font-family:var(--serif);font-weight:700;line-height:1.12;margin:0;letter-spacing:-.01em}
+h2{font-size:clamp(1.7rem,3.4vw,2.4rem)}
+h3{font-size:1.25rem}
+p{margin:0}
+:focus-visible{outline:3px solid var(--gold);outline-offset:3px;border-radius:4px}
+.wrap{width:min(1120px,100% - 40px);margin-inline:auto}
+.btn{display:inline-block;font:600 1rem var(--sans);padding:.8rem 1.4rem;border-radius:999px;text-decoration:none;border:2px solid transparent;cursor:pointer;transition:transform .15s,background .15s}
+.btn:active{transform:scale(.97)}
+.btn-gold{background:var(--gold);color:#2A1D1B}.btn-gold:hover{background:#ECB94F}
+.btn-line{border-color:rgba(255,255,255,.55);color:#fff}.btn-line:hover{background:rgba(255,255,255,.12)}
+.btn-wine{background:var(--wine);color:#fff}.btn-wine:hover{background:var(--wine-d)}
+
+/* header */
+header.site{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+header .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
+.brand{display:flex;align-items:center;gap:.6rem;text-decoration:none;color:var(--ink);font:700 1.3rem var(--serif)}
+.brand svg{width:30px;height:30px}
+nav ul{display:flex;gap:.2rem;list-style:none;margin:0;padding:0}
+nav a{display:block;padding:.45rem .9rem;border-radius:999px;color:var(--ink);text-decoration:none;font-weight:500}
+nav a:hover{background:var(--chip)}
+nav a[aria-current="page"]{background:var(--wine);color:#fff}
+.menu-btn{display:none;background:none;border:1px solid var(--line);color:var(--ink);border-radius:10px;padding:.45rem .8rem;font:600 .95rem var(--sans)}
+@media(max-width:760px){
+  .menu-btn{display:block}
+  nav{position:absolute;left:0;right:0;top:64px;background:var(--bg);border-bottom:1px solid var(--line);display:none;padding:.6rem 20px 1rem}
+  nav.open{display:block}
+  nav ul{flex-direction:column}
+}
+
+/* hero */
+.hero{background:var(--wine);color:#fff;position:relative;overflow:hidden}
+.hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:3rem;align-items:center;padding-block:4.5rem 5.5rem}
+.hero h1{font-size:clamp(2.5rem,6vw,4.6rem);font-weight:700}
+.hero p.lead{font-size:1.2rem;max-width:34ch;margin:1.3rem 0 2rem;color:#F6E4DF}
+.hero .cta{display:flex;gap:.8rem;flex-wrap:wrap}
+.collage{position:relative;height:420px}
+.collage figure{position:absolute;margin:0;background:#fff;padding:10px 10px 34px;border-radius:6px;box-shadow:0 14px 30px rgba(0,0,0,.28)}
+.collage figure img{width:100%;height:100%;object-fit:cover;border-radius:2px}
+.collage figcaption{position:absolute;left:12px;bottom:8px;font:500 .8rem var(--sans);color:#6E5F5A}
+.c1{width:62%;height:66%;left:0;top:6%;transform:rotate(-4deg)}
+.c2{width:52%;height:54%;right:0;top:0;transform:rotate(3.5deg)}
+.c3{width:56%;height:52%;right:6%;bottom:0;transform:rotate(-1.5deg)}
+@media(max-width:860px){.hero .wrap{grid-template-columns:1fr;padding-block:3rem 4rem}.collage{height:340px}}
+.band{height:34px;background-color:var(--green);background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='34' height='34' viewBox='0 0 34 34'><g fill='none' stroke='%23E0A93B' stroke-width='2'><path d='M17 4l9 13-9 13-9-13z'/></g><circle cx='17' cy='17' r='3' fill='%23F6E4DF'/><circle cx='0' cy='17' r='2' fill='%23E0A93B'/><circle cx='34' cy='17' r='2' fill='%23E0A93B'/></svg>");background-size:34px 34px}
+
+/* sections */
+section.block{padding-block:4.5rem}
+.sec-head{display:flex;justify-content:space-between;align-items:end;gap:1rem;margin-bottom:2rem;flex-wrap:wrap}
+.sec-head p{color:var(--muted);max-width:46ch;margin-top:.5rem}
+.more{font-weight:600}
+.cards{display:grid;grid-template-columns:1.4fr 1fr;grid-template-rows:auto auto;gap:1.4rem}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;overflow:hidden;text-decoration:none;color:inherit;display:block}
+.card .ph{aspect-ratio:16/10;overflow:hidden}
+.card .ph img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.card:hover .ph img{transform:scale(1.04)}
+.card .body{padding:1.1rem 1.3rem 1.3rem}
+.card .meta{color:var(--muted);font-size:.92rem;margin-bottom:.35rem}
+.cards .card:first-child{grid-row:span 2}
+.cards .card:first-child .ph{aspect-ratio:4/3}
+.cards .card:not(:first-child){display:grid;grid-template-columns:42% 1fr}
+.cards .card:not(:first-child) .ph{aspect-ratio:auto;height:100%}
+@media(max-width:860px){.cards{grid-template-columns:1fr}.cards .card:first-child{grid-row:auto}.cards .card:not(:first-child){grid-template-columns:1fr}.cards .card:not(:first-child) .ph{aspect-ratio:16/10}}
+
+.masonry{columns:3 260px;column-gap:14px}
+.masonry button{display:block;width:100%;margin:0 0 14px;padding:0;border:0;background:var(--chip);border-radius:12px;overflow:hidden;cursor:zoom-in;break-inside:avoid;position:relative}
+.masonry img{width:100%;height:auto;transition:transform .4s,filter .4s}
+.masonry button:hover img{transform:scale(1.04);filter:brightness(1.06)}
+
+.grant-hl{background:var(--green);color:#fff;border-radius:24px;padding:2.4rem;display:grid;grid-template-columns:1fr auto;gap:1.5rem;align-items:center}
+.grant-hl p{color:#DCE8DF;margin-top:.6rem;max-width:56ch}
+@media(max-width:700px){.grant-hl{grid-template-columns:1fr;padding:1.6rem}}
+
+.about{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center}
+.about .photo{border-radius:22px;overflow:hidden;aspect-ratio:5/4}
+.about .photo img{width:100%;height:100%;object-fit:cover}
+.about p+p{margin-top:1rem}
+@media(max-width:800px){.about{grid-template-columns:1fr}}
+
+/* inner pages */
+.page-head{padding-block:3rem 1.5rem}
+.page-head p{color:var(--muted);margin-top:.7rem;max-width:56ch}
+.chips{display:flex;gap:.5rem;flex-wrap:wrap;margin:1.2rem 0 2rem}
+.chip{border:1px solid var(--line);background:var(--card);color:var(--ink);padding:.45rem 1rem;border-radius:999px;font:500 .95rem var(--sans);cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--wine);border-color:var(--wine);color:#fff}
+.grid3{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:1.4rem}
+.back{display:inline-block;margin-top:2rem;font-weight:600;text-decoration:none}
+.facts{display:flex;gap:1.6rem;flex-wrap:wrap;color:var(--muted);margin-top:.9rem}
+.facts b{color:var(--ink);font-weight:600}
+
+.grants{display:grid;gap:1.1rem}
+.grant{background:var(--card);border:1px solid var(--line);border-left:6px solid var(--gold);border-radius:14px;padding:1.4rem 1.6rem;display:grid;grid-template-columns:1fr auto;gap:1.2rem;align-items:center}
+.grant .meta{color:var(--muted);font-size:.95rem;margin:.3rem 0 .6rem}
+.amount{font:700 1.5rem var(--serif);color:var(--green)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]) .amount{color:#A9D1B5}}
+.grant .side{text-align:right;display:grid;gap:.6rem;justify-items:end}
+@media(max-width:640px){.grant{grid-template-columns:1fr}.grant .side{text-align:left;justify-items:start}}
+.year-h{font-size:1.1rem;color:var(--muted);margin:2rem 0 .8rem;font-family:var(--sans);font-weight:600}
+
+footer.site{background:#2A1D1B;color:#E9DDD0;margin-top:2rem}
+footer .wrap{padding-block:2.6rem;display:flex;justify-content:space-between;gap:2rem;flex-wrap:wrap}
+footer a{color:#F4C766}
+footer small{display:block;margin-top:.6rem;color:#A8978B}
+
+/* lightbox */
+.lb{position:fixed;inset:0;z-index:50;background:rgba(15,10,9,.94);display:none;flex-direction:column;align-items:center;justify-content:center;padding:calc(env(safe-area-inset-top,0px) + 16px) 16px calc(env(safe-area-inset-bottom,0px) + 16px)}
+.lb.open{display:flex}
+.lb img{max-height:80vh;max-width:100%;object-fit:contain;border-radius:8px;touch-action:pan-y}
+.lb .cap{color:#E9DDD0;margin-top:.9rem;text-align:center;font-size:.98rem}
+.lb button{position:absolute;background:rgba(255,255,255,.12);border:0;color:#fff;width:48px;height:48px;border-radius:50%;font-size:1.5rem;cursor:pointer}
+.lb button:hover{background:rgba(255,255,255,.25)}
+.lb .x{top:calc(env(safe-area-inset-top,0px) + 12px);right:14px}
+.lb .p{left:12px;top:50%}.lb .n{right:12px;top:50%}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+@keyframes drop{from{opacity:0;transform:translateY(-14px) rotate(var(--r))}to{opacity:1;transform:translateY(0) rotate(var(--r))}}
+.collage figure{animation:drop .7s cubic-bezier(.2,.8,.2,1) both}
+.c1{--r:-4deg}.c2{--r:3.5deg;animation-delay:.12s}.c3{--r:-1.5deg;animation-delay:.24s}
+</style>
+</head>
+<body>
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="#/" aria-label="Padkaporos Táncegyüttes, főoldal">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="15" fill="#8C2F39"/><path d="M16 6l7 10-7 10-7-10z" fill="none" stroke="#E0A93B" stroke-width="2"/><circle cx="16" cy="16" r="2.6" fill="#F6E4DF"/></svg>
+      Padkaporos
+    </a>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="nav">Menü</button>
+    <nav id="nav" aria-label="Főmenü">
+      <ul>
+        <li><a href="#/" data-r="/">Kezdőlap</a></li>
+        <li><a href="#/esemenyek" data-r="/esemenyek">Események</a></li>
+        <li><a href="#/palyazatok" data-r="/palyazatok">Pályázatok</a></li>
+        <li><a href="#/rolunk" data-r="/rolunk">Rólunk</a></li>
+        <li><a href="#/kapcsolat" data-r="/kapcsolat">Kapcsolat</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+<main id="main" tabindex="-1"></main>
+<footer class="site">
+  <div class="wrap">
+    <div><b style="font:700 1.2rem var(--serif)">Padkaporos Táncegyüttes, Kiskunfélegyháza</b><small>Köszönjük adója 1%-át! Adószámunk: 18358401-1-03<br>Előnézet: a fényképek helyőrző illusztrációk, a szövegek és beszámolók az eredeti oldalról származnak.</small></div>
+    <div>vandormuzsikus@gmail.com<br><a href="#/kapcsolat">Kapcsolat</a></div>
+  </div>
+</footer>
+
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Képnézegető">
+  <button class="x" id="lbX" aria-label="Bezárás">×</button>
+  <button class="p" id="lbP" aria-label="Előző kép">‹</button>
+  <img id="lbImg" alt="">
+  <div class="cap" id="lbCap"></div>
+  <button class="n" id="lbN" aria-label="Következő kép">›</button>
+</div>
+
+<script>
+/* ---------- helyőrző fotók (SVG) ---------- */
+const PAL=[
+  ['#F2B134','#8C2F39','#2F4A3A'],['#E9C9A0','#2F4A3A','#8C2F39'],['#C94F5D','#F6E4DF','#E0A93B'],
+  ['#3E6B52','#F2D9A4','#8C2F39'],['#E6A15A','#5B2A33','#F6E4DF'],['#9FB8A5','#8C2F39','#F2B134']];
+function rng(s){return()=>{s|=0;s=s+0x6D2B79F5|0;let t=Math.imul(s^s>>>15,1|s);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+const RATIOS=[[400,300],[300,400],[400,400],[400,260],[300,380]];
+function fig(x,b,s,c,skin){return `<g transform="translate(${x} ${b}) scale(${s})"><circle cx="0" cy="-92" r="9" fill="${skin}"/><path d="M-9 -80h18l6 30h-30z" fill="${c}"/><path d="M-15 -50h30l16 50h-62z" fill="${c}" opacity=".9"/><path d="M-9 -78l-20 20M9 -78l20 -28" stroke="${skin}" stroke-width="5" stroke-linecap="round"/></g>`}
+function photo(seed,i,title){
+  const r=rng(seed*131+i*17+7),[w,h]=RATIOS[Math.floor(r()*RATIOS.length)],p=PAL[Math.floor(r()*PAL.length)];
+  const n=2+Math.floor(r()*3);let f='';
+  for(let k=0;k<n;k++){const x=w*(.18+.64*(k+r()*.4)/n),s=.55+r()*.5,c=[p[1],p[2],'#F6E4DF'][k%3];f+=fig(x,h*.93,s*(h/300),c,'#F0C9A8')}
+  const svg=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${w} ${h}"><defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${p[0]}"/><stop offset="1" stop-color="${p[0]}" stop-opacity=".55"/></linearGradient></defs><rect width="${w}" height="${h}" fill="url(#g)"/><circle cx="${w*(.2+r()*.6)}" cy="${h*.25}" r="${h*.16}" fill="#fff" opacity=".18"/><rect y="${h*.9}" width="${w}" height="${h*.1}" fill="#2A1D1B" opacity=".35"/>${f}</svg>`;
+  return {src:'data:image/svg+xml;utf8,'+encodeURIComponent(svg),w,h,alt:`${title} – fotó ${i+1}`,cap:`${title} · ${i+1}. kép`};
+}
+
+/* ---------- minta tartalom ---------- */
+const EVENTS=[
+  {id:'husvet-2026',t:'Húsvét 2026',d:'2026 tavasz',y:2026,cat:'Ünnep',place:'Kiskunfélegyháza',n:8,seed:1,txt:'A 2026-os húsvét képeit jelenleg PDF-ben tölti fel az egyesület. Az új oldalon ez is albumként nézhető majd.'},
+  {id:'evzaro-2025',t:'Évzáró táncház',d:'2025. május 24.',y:2025,cat:'Táncház',place:'Padkaporos Ház, Kiskunfélegyháza',n:12,seed:2,txt:'Az évad utolsó táncháza 20:00-tól. Kürti-Papp Nóra és Varga Andreas másfél órás táncoktatása után hajnalig tartó vigadalom következett, a muzsikát Inoka Győző és Barátai szolgáltatták.'},
+  {id:'husvet-2025',t:'Húsvéti locsolkodás és bál',d:'2025 húsvét',y:2025,cat:'Ünnep',place:'Kiskunfélegyháza',n:15,seed:3,txt:'A legények lovaskocsira pattantak, körbejárták a várost, meglocsolták a lányokat és összegyűjtötték a festett tojásokat. Este közös ünneplés volt, a Gyantár zenekar muzsikájára.'},
+  {id:'farsang-2025',t:'Farsangi felvonulás és táncház',d:'2025. február 22.',y:2025,cat:'Táncház',place:'Szakmaközi Művelődési Ház, Kiskunfélegyháza',n:14,seed:4,txt:'Felvonulás, banyaégetés, majd 18:00-tól táncház. Kátai Tibor aprók táncot, Kürti-Papp Nóra és Varga Andreas felcsíki táncot tanított. A zenét Inoka Győző és zenekara adta.'}
+];
+EVENTS.forEach(e=>{e.photos=Array.from({length:e.n},(_,i)=>photo(e.seed,i,e.t))});
+const GRANTS=[
+  {y:2025,t:'Beszámoló: CSSP együttesi támogatás',s:'CSSP',d:'A 2025-ös együttesi támogatás szakmai beszámolója.',u:'http://padkaporos.hu/beszámolók/beszámoló_2025/Beszámoló_a_CSSP_együttesi_támogatás_2025.pdf'},
+  {y:2024,t:'Beszámoló: CSSP együttesi támogatás',s:'CSSP',d:'A 2024-es együttesi támogatás beszámolója.',u:'http://padkaporos.hu/besz%C3%A1mol%C3%B3k/besz%C3%A1mol%C3%B3_2024/Besza%CC%81molo%CC%81_a_CSSP_egyu%CC%88ttesi_ta%CC%81mogata%CC%81s_2024.pdf'},
+  {y:2024,t:'Beszámoló: CSSP táncház támogatás',s:'CSSP',d:'A 2024-es táncház-támogatás beszámolója.',u:'http://padkaporos.hu/besz%C3%A1mol%C3%B3k/besz%C3%A1mol%C3%B3_2024/Besza%CC%81molo%CC%81_CSSP_t%C3%A1nch%C3%A1z_2024.pdf'},
+  {y:2023,t:'Beszámoló: CSSP táncház támogatás',s:'CSSP · CSSP-TANCHAZ-2022-0239',d:'A táncház-támogatás beszámolója.',u:'http://padkaporos.hu/besz%C3%A1mol%C3%B3k/besz%C3%A1mol%C3%B3_2023/Besza%CC%81molo%CC%81_CSSP-TANCHAZ-2022-0239.pdf'},
+  {y:2022,t:'Beszámoló: Csoóri program',s:'Csoóri program',d:'A 2022-es Csoóri program beszámolója.',u:'http://padkaporos.hu/besz%C3%A1mol%C3%B3k/besz%C3%A1mol%C3%B3_2022/csoori_beszamolo_2022.pdf'},
+  {y:2022,t:'Beszámoló: CSSP együttesi támogatás',s:'CSSP · CSSP-NEPTANC-MO-2022-0349',d:'A 2022-es néptánc együttesi támogatás beszámolója.',u:'http://padkaporos.hu/besz%C3%A1mol%C3%B3k/besz%C3%A1mol%C3%B3_2022/Besz%C3%A1mol%C3%B3_CSSP-NEPTANC-MO-2022-0349.pdf'}
+];
+const ALL=EVENTS.flatMap(e=>e.photos.slice(0,2).map(p=>({...p,ev:e})));
+
+/* ---------- segédek ---------- */
+const $=s=>document.querySelector(s),main=$('#main');
+const img=(p,cls='')=>`<img class="${cls}" src="${p.src}" width="${p.w}" height="${p.h}" alt="${p.alt}" loading="lazy">`;
+const gal=(photos,key)=>`<div class="masonry" data-g="${key}">${photos.map((p,i)=>`<button data-i="${i}" aria-label="Kép megnyitása: ${p.alt}">${img(p)}</button>`).join('')}</div>`;
+const card=e=>`<a class="card" href="#/esemenyek/${e.id}"><div class="ph">${img(e.photos[0])}</div><div class="body"><div class="meta">${e.d} · ${e.place} · ${e.cat}</div><h3>${e.t}</h3></div></a>`;
+const grant=g=>`<article class="grant"><div><h3>${g.t}</h3><div class="meta">${g.s} · ${g.y}</div><p>${g.d}</p></div><div class="side"><a class="btn btn-wine" href="${g.u}" target="_blank" rel="noopener" aria-label="PDF megnyitása: ${g.t} ${g.y}">PDF megnyitása</a></div></article>`;
+let GAL={};
+
+/* ---------- oldalak ---------- */
+const pages={
+'/':()=>{
+  const latest=EVENTS.slice(0,3),h=EVENTS[0].photos;
+  GAL.home=ALL.slice(0,9);
+  return `
+  <section class="hero"><div class="wrap">
+    <div><h1>Padkaporos jókedvet!</h1>
+    <p class="lead">Kiskunfélegyházi néptáncegyüttes 1998 óta. Táncházak, ünnepek, fellépések és pályázati beszámolók egy helyen.</p>
+    <div class="cta"><a class="btn btn-gold" href="#/esemenyek">Nézd meg a képeket</a><a class="btn btn-line" href="#/palyazatok">Pályázataink</a></div></div>
+    <div class="collage" aria-hidden="true">
+      <figure class="c1">${img(EVENTS[1].photos[0])}<figcaption>Évzáró táncház</figcaption></figure>
+      <figure class="c2">${img(EVENTS[0].photos[2])}<figcaption>Húsvét 2026</figcaption></figure>
+      <figure class="c3">${img(EVENTS[3].photos[1])}<figcaption>Farsang 2025</figcaption></figure>
+    </div></div></section>
+  <div class="band" aria-hidden="true"></div>
+  <section class="block"><div class="wrap">
+    <div class="sec-head"><div><h2>Legutóbbi események</h2><p>Minden eseménynek saját albuma van: kattints, és lapozd végig a képeket.</p></div><a class="more" href="#/esemenyek">Összes esemény</a></div>
+    <div class="cards">${latest.map(card).join('')}</div></div></section>
+  <section class="block" style="padding-top:0"><div class="wrap">
+    <div class="sec-head"><div><h2>Pillanatok a táncházakból és az ünnepekről</h2></div></div>
+    ${gal(GAL.home,'home')}</div></section>
+  <section class="block" style="padding-top:0"><div class="wrap">
+    <div class="grant-hl"><div><h2>Pályázataink és beszámolóink</h2><p>A CSSP-támogatások és más programok szakmai beszámolói 2022-től évek szerint, PDF-ben letölthetők.</p></div><a class="btn btn-gold" href="#/palyazatok">Beszámolók megtekintése</a></div></div></section>
+  <section class="block" style="padding-top:0"><div class="wrap about">
+    <div class="photo">${img(EVENTS[2].photos[3])}</div>
+    <div><h2>Kik vagyunk?</h2><p style="margin-top:1rem">1998-ban alakultunk Kiskunfélegyházán, lelkes, táncházba járó fiatalokból. A nevünket nagyszüleink hagyatékából vettük: ők padkaporos bálokon mulattak, és porozták össze a búboskemence padkáját.</p><p>Táncaink mellett a meséinket és a jeles napokhoz kötődő szokásainkat is megőrizzük. Gyere el egy táncházra, és próbáld ki!</p><p style="margin-top:1.4rem"><a class="btn btn-wine" href="#/kapcsolat">Kapcsolat</a></p></div></div></section>`;
+},
+'/esemenyek':()=>{
+  const years=[...new Set(EVENTS.map(e=>e.y))],cats=[...new Set(EVENTS.map(e=>e.cat))];
+  return `<div class="wrap"><div class="page-head"><h1 style="font-size:clamp(2rem,5vw,3.2rem)">Események</h1><p>Táncházak és ünnepek, albumonként. Szűrj évre vagy fajtára.</p></div>
+  <div class="chips" role="group" aria-label="Szűrők"><button class="chip" data-f="all" aria-pressed="true">Mind</button>${years.map(y=>`<button class="chip" data-f="y${y}" aria-pressed="false">${y}</button>`).join('')}${cats.map(c=>`<button class="chip" data-f="c${c}" aria-pressed="false">${c}</button>`).join('')}</div>
+  <div class="grid3" id="evgrid">${EVENTS.map(card).join('')}</div></div>`;
+},
+'/palyazatok':()=>{
+  const years=[...new Set(GRANTS.map(g=>g.y))];
+  return `<div class="wrap"><div class="page-head"><h1 style="font-size:clamp(2rem,5vw,3.2rem)">Pályázatok és beszámolók</h1><p>A pályázati támogatásokról készült beszámolók évek szerint. A PDF-ek a jelenlegi oldalról nyílnak meg.</p></div>
+  <div class="grants">${years.map(y=>`<h2 class="year-h">${y}</h2>`+GRANTS.filter(g=>g.y===y).map(grant).join('')).join('')}</div></div>`;
+},
+'/rolunk':()=>`<div class="wrap"><div class="page-head"><h1 style="font-size:clamp(2rem,5vw,3.2rem)">Rólunk</h1></div>
+  <div class="about"><div class="photo">${img(EVENTS[3].photos[0])}</div><div><p>Kiskunfélegyházán, 1998-ban alakultunk lelkes, táncházba járó fiatalokból. A nevünket nagyszüleink hagyatékából vettük, akik padkaporos bálokon mulattak, táncoltak, porozták össze a búboskemence padkáját.</p><p>Életben tartjuk és gyermekeinknek is továbbadjuk a hagyományokat: a táncok mellett a meséinket és a jeles napokhoz kötődő szokásainkat is megőrizzük, és őseink módján ünnepeljük meg őket.</p><p>Városi ünnepségeken gyakran részt veszünk, néha szervezünk is (Libafesztivál, Bajuszfesztivál). A Megyejárás című produkcióval a Nemzeti Színház színpadára is eljutottunk, és Európa több országában, valamint Vajdaságban, Erdélyben és a Felvidéken is bemutattuk a táncainkat. Utánpótláscsoportjainkban Kasza Ákos vezetésével már óvodás kortól ismerkedhetnek a gyerekek a táncokkal és a népi játékokkal.</p><p style="color:var(--muted)">Gulyás László, Padkaporos Táncegyüttes</p></div></div></div>`,
+'/kapcsolat':()=>`<div class="wrap"><div class="page-head"><h1 style="font-size:clamp(2rem,5vw,3.2rem)">Kapcsolat</h1><p>Írj nekünk, vagy gyere el egy táncházra.</p></div>
+  <div class="grid3"><div class="card"><div class="body"><h3>Vezető</h3><p class="meta">Gulyás László</p></div></div><div class="card"><div class="body"><h3>Postacím</h3><p class="meta">6100 Kiskunfélegyháza, Almafa utca 3.</p></div></div><div class="card"><div class="body"><h3>Telefon</h3><p class="meta"><a href="tel:+36302183275">+36 30 218 32 75</a></p></div></div><div class="card"><div class="body"><h3>E-mail</h3><p class="meta"><a href="mailto:vandormuzsikus@gmail.com">vandormuzsikus@gmail.com</a></p></div></div></div></div>`
+};
+function eventPage(id){
+  const e=EVENTS.find(x=>x.id===id);if(!e)return pages['/']();
+  GAL.ev=e.photos;
+  return `<div class="wrap"><div class="page-head"><a class="back" href="#/esemenyek" style="margin:0">‹ Vissza az eseményekhez</a>
+  <h1 style="font-size:clamp(2rem,5vw,3.2rem);margin-top:1rem">${e.t}</h1><div class="facts"><span><b>${e.d}</b></span><span>${e.place}</span><span>${e.cat}</span><span>${e.n} kép</span></div><p>${e.txt}</p></div>${gal(e.photos,'ev')}</div>`;
+}
+
+/* ---------- router ---------- */
+function render(){
+  const h=(location.hash.slice(1)||'/');
+  const m=h.match(/^\/esemenyek\/(.+)$/);
+  main.innerHTML=m?eventPage(m[1]):(pages[h]||pages['/'])();
+  const base=m?'/esemenyek':(pages[h]?h:'/');
+  document.querySelectorAll('nav a').forEach(a=>a.toggleAttribute('aria-current',a.dataset.r===base)||0);
+  document.querySelectorAll('nav a').forEach(a=>{if(a.dataset.r===base)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current')});
+  document.title=(m?EVENTS.find(x=>x.id===m[1])?.t+' – ':'')+'Padkaporos Táncegyüttes';
+  $('#nav').classList.remove('open');$('#menuBtn').setAttribute('aria-expanded','false');
+  window.scrollTo(0,0);
+}
+addEventListener('hashchange',render);render();
+$('#menuBtn').onclick=e=>{const o=$('#nav').classList.toggle('open');e.target.setAttribute('aria-expanded',o)};
+
+/* szűrők + galéria megnyitás */
+main.addEventListener('click',e=>{
+  const c=e.target.closest('.chip');
+  if(c){document.querySelectorAll('.chip').forEach(x=>x.setAttribute('aria-pressed',x===c));
+    const f=c.dataset.f,list=EVENTS.filter(v=>f==='all'||(f[0]==='y'&&'y'+v.y===f)||(f[0]==='c'&&'c'+v.cat===f));
+    $('#evgrid').innerHTML=list.length?list.map(card).join(''):'<p>Ehhez a szűrőhöz még nincs esemény.</p>';return}
+  const b=e.target.closest('.masonry button');
+  if(b){const g=b.parentElement.dataset.g;open(GAL[g],+b.dataset.i)}
+});
+
+/* lightbox */
+let cur=[],ix=0,last=null;
+function open(list,i){cur=list;ix=i;last=document.activeElement;show();$('#lb').classList.add('open');document.body.style.overflow='hidden';$('#lbX').focus()}
+function show(){const p=cur[ix];$('#lbImg').src=p.src;$('#lbImg').alt=p.alt;$('#lbCap').textContent=`${p.cap||p.alt}  (${ix+1}/${cur.length})`}
+function step(d){ix=(ix+d+cur.length)%cur.length;show()}
+function close(){$('#lb').classList.remove('open');document.body.style.overflow='';last&&last.focus()}
+$('#lbX').onclick=close;$('#lbP').onclick=()=>step(-1);$('#lbN').onclick=()=>step(1);
+$('#lb').addEventListener('click',e=>{if(e.target.id==='lb')close()});
+addEventListener('keydown',e=>{if(!$('#lb').classList.contains('open'))return;if(e.key==='Escape')close();if(e.key==='ArrowLeft')step(-1);if(e.key==='ArrowRight')step(1)});
+let sx=null;
+$('#lb').addEventListener('touchstart',e=>{sx=e.touches[0].clientX},{passive:true});
+$('#lb').addEventListener('touchend',e=>{if(sx===null)return;const dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>50)step(dx<0?1:-1);sx=null});
+</script>
+</body>
+</html>
