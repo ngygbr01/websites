@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Websites | ngygbr01</title>
+    <style>
+        :root {
+            --bg: #ffffff;
+            --surface: #f9fafb;
+            --border: #e5e7eb;
+            --text-main: #111827;
+            --text-muted: #6b7280;
+            --row-hover: #f3f4f6;
+            --btn-bg: #f3f4f6;
+            --btn-hover: #e5e7eb;
+        }
+
+        [data-theme="dark"] {
+            --bg: #09090b;
+            --surface: #121214;
+            --border: #27272a;
+            --text-main: #fafafa;
+            --text-muted: #a1a1aa;
+            --row-hover: #18181b;
+            --btn-bg: #18181b;
+            --btn-hover: #27272a;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg);
+            color: var(--text-main);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 24px;
+            transition: background-color 0.2s ease, color 0.2s ease;
+        }
+
+        .wrapper {
+            width: 100%;
+            max-width: 720px;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+        }
+
+        .subtitle {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        .theme-btn {
+            background-color: var(--btn-bg);
+            color: var(--text-main);
+            border: 1px solid var(--border);
+            padding: 8px 14px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.15s ease;
+        }
+
+        .theme-btn:hover {
+            background-color: var(--btn-hover);
+        }
+
+        /* Fix méretű, lekerekített táblázat keret */
+        .table-container {
+            background-color: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            height: 400px; /* Fix magasság */
+            overflow-y: auto; /* Belső görgetés */
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        thead th {
+            position: sticky;
+            top: 0;
+            background-color: var(--surface);
+            border-bottom: 1px solid var(--border);
+            padding: 14px 20px;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+            z-index: 1;
+        }
+
+        tbody tr {
+            border-bottom: 1px solid var(--border);
+            transition: background-color 0.15s ease;
+            cursor: pointer;
+        }
+
+        tbody tr:last-child {
+            border-bottom: none;
+        }
+
+        tbody tr:hover {
+            background-color: var(--row-hover);
+        }
+
+        td {
+            padding: 16px 20px;
+            font-size: 0.95rem;
+        }
+
+        .folder-name {
+            font-weight: 500;
+            color: var(--text-main);
+            text-decoration: none;
+            display: block;
+        }
+
+        .folder-desc {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+        }
+
+        .arrow {
+            text-align: right;
+            color: var(--text-muted);
+            font-weight: 500;
+            width: 40px;
+        }
+
+        tbody tr:hover .arrow {
+            color: var(--text-main);
+        }
+
+        /* Egyedi, letisztult görgetősáv */
+        .table-container::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .table-container::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .table-container::-webkit-scrollbar-thumb {
+            background-color: var(--border);
+            border-radius: 10px;
+        }
+
+        footer {
+            margin-top: 16px;
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="wrapper">
+        <header>
+            <div>
+                <h1>Websites</h1>
+                <p class="subtitle">Directory of web projects and HTML pages</p>
+            </div>
+            <button class="theme-btn" id="themeToggle" onclick="toggleTheme()">Dark Mode</button>
+        </header>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Project / Folder</th>
+                        <th>Description</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr onclick="window.location.href='./IMPI/'">
+                        <td><a href="./impigame/" class="folder-name">IMPI</a></td>
+                        <td class="folder-desc">IMPI web interface</td>
+                        <td class="arrow">&rarr;</td>
+                    </tr>
+
+                    <tr onclick="window.location.href='./tanci/'">
+                        <td><a href="./tanci/" class="folder-name">tanci</a></td>
+                        <td class="folder-desc">Tanci web application</td>
+                        <td class="arrow">&rarr;</td>
+                    </tr>
+
+                    <!-- Új sor hozzáadásához másold le az egyik <tr>...</tr> blokkot -->
+                </tbody>
+            </table>
+        </div>
+
+        <footer>
+            ngygbr01 &bull; 2026
+        </footer>
+    </div>
+
+    <script>
+        const htmlEl = document.documentElement;
+        const toggleBtn = document.getElementById('themeToggle');
+
+        // Mentett téma betöltése
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        setTheme(savedTheme);
+
+        function setTheme(theme) {
+            if (theme === 'dark') {
+                htmlEl.setAttribute('data-theme', 'dark');
+                toggleBtn.textContent = 'Light Mode';
+            } else {
+                htmlEl.removeAttribute('data-theme');
+                toggleBtn.textContent = 'Dark Mode';
+            }
+            localStorage.setItem('theme', theme);
+        }
+
+        function toggleTheme() {
+            const current = htmlEl.getAttribute('data-theme');
+            setTheme(current === 'dark' ? 'light' : 'dark');
+        }
+    </script>
+
+</body>
+</html>
