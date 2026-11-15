@@ -135,6 +135,8 @@ footer small{display:block;margin-top:.6rem;color:#A8978B}
 .lb button:hover{background:rgba(255,255,255,.25)}
 .lb .x{top:calc(env(safe-area-inset-top,0px) + 12px);right:14px}
 .lb .p{left:12px;top:50%}.lb .n{right:12px;top:50%}
+.lb.single .p,.lb.single .n{display:none}
+@media(max-width:760px),(pointer:coarse){.lb .p,.lb .n{display:none}}
 @media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 @keyframes drop{from{opacity:0;transform:translateY(-14px) rotate(var(--r))}to{opacity:1;transform:translateY(0) rotate(var(--r))}}
 .collage figure{animation:drop .7s cubic-bezier(.2,.8,.2,1) both}
@@ -261,7 +263,7 @@ const P_EVZARO=lst('évzáró_2025_','kepek/kepek_2025/evzaro_kepek_2025/origina
 const P_HUSVET=lst('husvet_2025_','kepek/kepek_2025/husvet_2025_',['492011734_700827965836131_4466689153822236049_n.jpg','492002841_700827902502804_8332868270305969601_n.jpg','492004829_700828195836108_4728272730412490687_n.jpg','492015730_700827829169478_1831656249140357721_n.jpg','492020419_700828179169443_518138041458486797_n.jpg','492129534_700828032502791_5616903173874780950_n.jpg','492146960_700827972502797_5795313678909974967_n.jpg','492335862_700835699168691_7870213470774945365_n.jpg','493273439_700828055836122_723919145464490393_n.jpg','492025354_700825135836414_3452368940541722739_n.jpg'],'Húsvét 2025');
 const P_FARSANG=lst('farsang_2025_','kepek/kepek_2025/farsang_2025_',['486322678_679709837947944_3538608800614301133_n.jpg','486156510_679710034614591_695651470971429547_n.jpg','486612835_679711867947741_1959917760365168635_n.jpg','487206229_679709997947928_3664541807667930012_n.jpg','486789017_679711394614455_5515600754234192204_n.jpg','486512237_679712814614313_4649468898621652769_n.jpg'],'Farsang 2025');
 const P_HUSVET26=[];
-const POS_EVZARO=pl('evzaro_2025_plakat_evzaro.jpg','2025/evzaro_2025_plakat_evzaro.jpg','Évzáró táncház 2025'),POS_FARSANG=pl('farsang_2025_plakat.jpg','2025/farsang_2025_plakat.jpg','Farsangi táncház 2025'),POS_HUSVET25=pl('husvet_2025_plakat.jpg','2025/husvet_2025_plakat.jpg','Húsvéti batyus táncház 2025'),POS_HUSVET26=pl('husvet_2026_plakát.jpg','2026/husvet_2026_plakát.jpg','Húsvéti táncház 2026');
+const POS_EVZARO=pl('evzaro_2025_plakat_evzaro.jpg','2025/evzaro_2025_plakat_evzaro.jpg','Évzáró táncház 2025'),POS_FARSANG=pl('farsang_2025_plakat_1.jpg','2025/farsang_2025_plakat.jpg','Farsangi táncház 2025'),POS_HUSVET25=pl('husvet_2025_plakat.jpg','2025/husvet_2025_plakat.jpg','Húsvéti batyus táncház 2025'),POS_HUSVET26=pl('husvet_2026_plakát.jpg','2026/husvet_2026_plakát.jpg','Húsvéti táncház 2026');
 GROUP.src=LOC('csoportkep002.jpg');GROUP.r=U('kepek/csoportkep002.jpg');
 
 const TAGS=['#padkaporosegyüttes','#padkacsalád','#atáncélmény'];
@@ -397,7 +399,7 @@ main.addEventListener('click',e=>{
 /* lightbox */
 let cur=[],ix=0,last=null;
 function open(list,i){cur=list;ix=i;last=document.activeElement;show();$('#lb').classList.add('open');document.body.style.overflow='hidden';$('#lbX').focus()}
-function show(){const p=cur[ix],L=$('#lbImg');L.dataset.t='';L.dataset.r=p.r||'';L.src=p.src;$('#lbImg').alt=p.alt;$('#lbCap').textContent=`${p.cap||p.alt}  (${ix+1}/${cur.length})`}
+function show(){const p=cur[ix],L=$('#lbImg');$('#lb').classList.toggle('single',cur.length<2);L.dataset.t='';L.dataset.r=p.r||'';L.src=p.src;$('#lbImg').alt=p.alt;$('#lbCap').textContent=`${p.cap||p.alt}  (${ix+1}/${cur.length})`}
 function step(d){ix=(ix+d+cur.length)%cur.length;show()}
 function close(){$('#lb').classList.remove('open');document.body.style.overflow='';last&&last.focus()}
 $('#lbX').onclick=close;$('#lbP').onclick=()=>step(-1);$('#lbN').onclick=()=>step(1);
